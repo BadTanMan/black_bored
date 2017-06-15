@@ -1,0 +1,34 @@
+
+<p>
+  <h1><%= @article.title %></h1>
+</p>
+
+<p>
+  <% if current_user.admin? %>
+    <%= link_to 'Edit Class', edit_article_path(@article), class: 'btn btn-success'%>
+  <% end %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+</p>
+
+<p>
+  <%= @article.text %>
+</p>
+
+<p>
+  <% @article.contents.order :title %>
+  <% @article.contents.each do |c| %>
+	  <p>
+	    <strong><%= c.title %></strong>
+	  </p>
+	  <p>
+	    <%= c.data %>
+	  </p>
+  <% end %>
+</p>
+
+<p>
+  <%= link_to 'Back', articles_path, class: 'btn btn-primary'  %>
+</p>

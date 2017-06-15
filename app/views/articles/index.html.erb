@@ -1,0 +1,43 @@
+<% if current_user.admin? %>
+  <p>
+    <h1><strong>Teachers Dashboard</strong></h1>
+  </p>
+<% else %>
+  <p>
+    <h1><strong>Student Dashboard</strong></h1>
+  </p>
+<% end %>
+
+<table>
+  <tr>
+    <th><h4>Class</h4></th>
+  </tr>
+
+ <%#= CHECKS FOR USER ADMIN PRIVELEGES AND THEN DISPLAYS APPROPRIATE CONTROLS %>
+   <% if current_user.admin? %>
+
+     <p>
+	     <%= link_to 'Add New Class', new_article_path, class: 'btn btn-success' %>
+	     <%= link_to 'View Class Contents', contents_path, class: 'btn btn-success' %>
+	   </p>
+
+    <% @articles.each do |article| %>
+	     <tr>
+	       <td><%= article.title %></td>
+		     <td><%= link_to 'Show Class', article_path(article), class: 'btn btn-primary btn-sm' %></td>
+		     <td><%= link_to 'Edit Class', edit_article_path(article), class: 'btn btn-info btn-sm'  %></td>
+		     <td><%= link_to 'Delete Class', article_path(article), class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure you want to delete the class?' } %></td>
+	     </tr>
+    <% end %>
+
+  <% else %>
+
+    <% @articles.each do |article| %>
+	    <tr>
+	      <td><%= article.title %></td>
+		    <td><%= link_to 'Show Class', article_path(article), class: 'btn btn-primary btn-sm'  %></td>
+	    </tr>
+	<% end %>
+
+<% end %>
+</table>

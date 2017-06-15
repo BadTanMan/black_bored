@@ -1,0 +1,33 @@
+<%= form_for(content) do |f| %>
+  <% if content.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(content.errors.count, "error") %> prohibited this content from being saved:</h2>
+
+      <ul>
+      <% content.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Class" %>
+    <%= f.select :article_id, [['History','1'],['Science','2'],['Mathematics','3'],['Arts','4']] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Content" %>
+    <%= f.text_field :data %>
+  </div>
+
+  <div class="actions">
+	  <%= f.submit%>
+    <%= link_to 'Back', contents_path, class: 'btn btn-primary' %>
+  </div>
+<% end %>
